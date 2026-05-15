@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="page-title">Issue Book</h2>
+
+<div class="card p-4">
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Select Book</label>
+            <select name="book_id" class="form-select" required>
+                <option value="">Choose available book</option>
+                {% for book in books %}
+                    <option value="{{ book.book_id }}">
+                        {{ book.title }} - Available: {{ book.available_copies }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Select Member</label>
+            <select name="member_id" class="form-select" required>
+                <option value="">Choose member</option>
+                {% for member in members %}
+                    <option value="{{ member.member_id }}">
+                        {{ member.full_name }} - {{ member.email }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Issue Book</button>
+        <a href="{{ url_for('loans') }}" class="btn btn-secondary">Cancel</a>
+
+    </form>
+</div>
+
+{% endblock %}
